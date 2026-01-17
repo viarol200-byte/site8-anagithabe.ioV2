@@ -3,6 +3,47 @@ body {
 	padding: 2rem;
 	font-family: -apple-system, BlinkMacSystemFont, "Arial", sans-serif;
 }
+.group-buttons {
+    display: flex;
+    gap: 1px;
+    margin-top: 10px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(220,38,38,0.2);
+    border: 1px solid rgba(220,38,38,0.2);
+}
+.group-buttons .enter-btn {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 11px;
+    border-radius: 0;
+    border: none;
+    background: rgba(10,10,10,0.8);
+}
+.group-buttons .enter-btn:hover {
+    background: rgba(220,38,38,0.2);
+    box-shadow: none;
+}
+.enter-btn {
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+.enter-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(220,38,38,0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.enter-btn:hover::after {
+    opacity: 1;
+}
 /* AI Watermark styles */
 .ai-watermark {
     position: fixed;
@@ -39,10 +80,77 @@ body {
     color: var(--blood-3);
     animation: pulse 2s infinite;
 }
-
 .ai-watermark span {
     color: #10a37f;
     text-shadow: 0 0 8px rgba(16,163,127,0.3);
+}
+
+/* Lesson Modal Styles */
+.lesson-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 1200px;
+    height: 80%;
+    background: var(--bg-card);
+    border-radius: 10px;
+    border: 1px solid var(--blood-3);
+    box-shadow: 0 0 50px rgba(220,38,38,0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    padding: 16px 20px;
+    background: rgba(10,10,10,0.8);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    color: var(--blood-light);
+    font-size: 18px;
+    letter-spacing: 0.05em;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: var(--blood-3);
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.close-btn:hover {
+    color: var(--blood-light);
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    flex: 1;
+    position: relative;
+}
+
+.modal-body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 h1 {
 	font-size: 16px;
