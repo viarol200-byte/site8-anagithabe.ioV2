@@ -9,7 +9,7 @@
         { id: 7, subject: 'ПІДПРИЄМНИЦТВО', link: 'https://meet.google.com/sun-zyrg-tcb' },
         { id: 8, subject: 'ЗАРУБІЖНА ЛІТЕРАТУРА', link: 'https://meet.google.com/bxx-oxhy-xqj' },
         { id: 9, subject: 'УКРАЇНСЬКА МОВА (2 ГРУПА)', link: 'https://meet.google.com/wmd-kqoy-qbw' },
-{ id: 10, subject: 'ІСТОРІЯ', link: 'https://meet.google.com/hsa-dphb-msr' },
+        { id: 10, subject: 'ІСТОРІЯ', link: 'https://meet.google.com/hsa-dphb-msr' },
         { id: 11, subject: 'АЛГЕБРА', link: 'https://meet.google.com/ywa-ctyv-itm' },
         { id: 12, subject: 'ГЕОМЕТРІЯ', link: 'https://meet.google.com/sxq-njwb-wob' },
         { id: 13, subject: 'БІОЛОГІЯ', link: 'https://meet.google.com/bzw-gbrz-cgo' },
@@ -148,3 +148,4 @@ setInterval(() => {
         });
     }
 });
+
