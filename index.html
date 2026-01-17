@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -112,26 +111,118 @@
             animation: gridPulse 4s ease-in-out infinite;
         }
 
-        @keyframes gridPulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+        .orb-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
         }
 
-        .radial-glow {
+        .orb {
             position: fixed;
             top: 50%;
             left: 50%;
-            width: 150vmax;
-            height: 150vmax;
-            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            margin-top: -400px;
+            margin-left: -400px;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: orbFloat 25s infinite linear;
+            opacity: 0.8;
             pointer-events: none;
-            z-index: 2;
-            background: radial-gradient(
-                circle at center,
-                rgba(127, 29, 29, 0.2) 0%,
-                rgba(127, 29, 29, 0.08) 30%,
-                transparent 60%
-            );
+            z-index: -1;
+        }
+
+        @keyframes orbFloat {
+            0% { transform: translate(-30%, -30%) rotate(0deg) scale(1); }
+            33% { transform: translate(30%, 10%) rotate(120deg) scale(1.2); }
+            66% { transform: translate(-10%, 40%) rotate(240deg) scale(0.8); }
+            100% { transform: translate(-30%, -30%) rotate(360deg) scale(1); }
+        }
+
+        .ip-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ip-content {
+            background: #0a0a0a;
+            border: 1px solid var(--blood-3);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(220, 38, 38, 0.3);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .ip-label {
+            font-size: 12px;
+            color: var(--text-dim);
+            letter-spacing: 0.3em;
+            margin-bottom: 15px;
+        }
+
+        .ip-value {
+            font-size: 24px;
+            color: var(--blood-light);
+            font-weight: bold;
+            text-shadow: 0 0 15px var(--blood-3);
+            margin-bottom: 25px;
+        }
+
+        .ip-close {
+            background: transparent;
+            border: 1px solid var(--blood-3);
+            color: var(--blood-3);
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            transition: all 0.3s;
+        }
+
+        .ip-close:hover {
+            background: var(--blood-3);
+            color: white;
+        }
+
+        .subtitle {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 9999px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.05);
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .subtitle:hover {
+            border-color: var(--blood-3);
+            color: var(--text-main);
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.2);
         }
 
         .container {
@@ -219,6 +310,11 @@
             z-index: 10;
         }
 
+        .subtitle-wrapper {
+            margin-top: -10px;
+            margin-bottom: 40px;
+        }
+
         .subtitle {
             display: inline-flex;
             align-items: center;
@@ -227,7 +323,6 @@
             border-radius: 9999px;
             background: rgba(0,0,0,0.5);
             border: 1px solid rgba(255,255,255,0.05);
-            margin-bottom: 40px;
             font-size: 10px;
             letter-spacing: 0.2em;
             color: var(--text-dim);
@@ -703,193 +798,227 @@
         }
 
         .footer-text {
-            font-size: 12px;
-            color: #6b7280;
-            letter-spacing: 0.05em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 10px;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
         }
 
         .footer-text span {
             color: var(--blood-3);
         }
 
-        .node-status {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 12px;
-            color: #6b7280;
-        }
-
-        .node-status svg {
-            width: 14px;
-            height: 14px;
-            color: #6b7280;
-        }
-
-        .node-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #22c55e;
-            box-shadow: 0 0 8px #22c55e;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes microGlitch {
-            0% { transform: translate(0); }
-            25% { transform: translate(-2px, 1px); }
-            50% { transform: translate(2px, -1px); }
-            75% { transform: translate(-1px, -1px); }
-            100% { transform: translate(0); }
-        }
-
-        .micro-glitch {
-            animation: microGlitch 0.1s ease-out;
-        }
         .footer-links {
             display: flex;
-            gap: 12px;
+            gap: 20px;
         }
 
         .footer-btn {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            border-radius: 9999px;
-            background: rgba(10, 10, 10, 0.8);
-            border: 1px solid rgba(255,255,255,0.1);
+            gap: 10px;
+            padding: 10px 20px;
+            background: rgba(15, 15, 15, 0.6);
+            border: 1px solid rgba(220, 38, 38, 0.15);
             color: var(--text-dim);
-            font-size: 12px;
             text-decoration: none;
-            transition: all 0.2s;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .footer-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(220, 38, 38, 0.1),
+                transparent
+            );
+            transition: 0.5s;
         }
 
         .footer-btn:hover {
-            background: rgba(220, 38, 38, 0.2);
-            color: var(--blood-light);
             border-color: var(--blood-3);
+            color: var(--text-main);
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.2);
+            transform: translateY(-2px);
+            background: rgba(20, 20, 20, 0.8);
+        }
+
+        .footer-btn:hover::before {
+            left: 100%;
         }
 
         .footer-btn svg {
             width: 14px;
             height: 14px;
+            transition: transform 0.3s;
+            color: var(--blood-3);
+        }
+
+        .footer-btn:hover svg {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .node-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 14px;
+            border-radius: 4px;
+            background: rgba(220, 38, 38, 0.05);
+            border: 1px solid rgba(220, 38, 38, 0.1);
+            font-size: 9px;
+            letter-spacing: 0.1em;
+            color: var(--blood-3);
+        }
+
+        .node-status svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .node-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--blood-3);
+            box-shadow: 0 0 5px var(--blood-3);
         }
 
         @media (max-width: 768px) {
-            .scanlines {
-                display: none;
+            .header-content {
+                justify-content: center;
+                text-align: center;
             }
-            .lessons-grid {
-                grid-template-columns: 1fr;
-            }
-            .stats {
-                gap: 12px;
-            }
-            .stat-card {
-                padding: 12px 18px;
-            }
+            
             .footer-content {
                 flex-direction: column;
-                align-items: flex-start;
+                text-align: center;
             }
-            .footer-links {
-                width: 100%;
-                justify-content: space-between;
+            
+            .stats {
+                gap: 10px;
+            }
+            
+            .stat-card {
+                flex: 1 1 140px;
+                justify-content: center;
             }
         }
-</style>
-<link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
-</head>
+    </style>
+<link rel="stylesheet" href="style.css"></head>
 <body>
     <div class="noise"></div>
     <div class="scanlines"></div>
     <div class="vhs-tracking"></div>
     <div class="bg-grid"></div>
+    <div class="orb-container">
+        <div class="orb"></div>
+    </div>
     <div class="radial-glow"></div>
+
+    <div id="ip-modal" class="ip-modal">
+        <div class="ip-content">
+            <div class="ip-label">UPLINK_ESTABLISHED</div>
+            <div id="ip-display" class="ip-value">IDENTIFYING...</div>
+            <button class="ip-close" onclick="document.getElementById('ip-modal').style.display='none'">CLOSE_TERMINAL</button>
+        </div>
+    </div>
 
     <header>
         <div class="header-content">
             <div class="version">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
-                v2.0.4_beta
+                <span>SITETCKY_OS v2.0.4</span>
             </div>
             <div class="header-right">
                 <div class="status-indicator">
                     <div class="status-dot"></div>
-                    <span>SYSTEM_ONLINE</span>
+                    <span>LINK_ESTABLISHED</span>
                 </div>
                 <div class="clock" id="clock">00:00:00</div>
             </div>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="subtitle">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
-            <span>Шкільний портал // Активний</span>
-        </div>
-
-        <div class="glitch-container" onclick="triggerGlitch()">
-            <span class="glitch-red">8-А ONLINE</span>
-            <span class="glitch-dark">8-А ONLINE</span>
-            <h1 class="glitch" data-text="8-А ONLINE">8-А ONLINE</h1>
-            <div class="scan-flash"></div>
-            <div class="glitch-line"></div>
-        </div>
-
-        <div class="description">
-            <p class="terminal-text"><span>&gt;</span> Ініціалізація системи...</p>
-            <p class="terminal-text"><span>&gt;</span> Перевірка з'єднання...</p>
-            <p class="terminal-text"><span>&gt;</span> Завантаження модулів...</p>
-            <p class="terminal-text"><span>&gt;</span> Система готова. Оберіть урок для підключення.</p>
-        </div>
-
-        <div class="stats">
-            <div class="stat-card">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-                </svg>
-                <div>
-                    <div class="stat-label">ONLINE</div>
-                    <div class="stat-value" id="online-count">24/7</div>
-</div>
+    <main class="container">
+        <section class="hero">
+            <div class="glitch-container" onclick="location.reload()">
+                <div class="scan-flash"></div>
+                <div class="glitch-line"></div>
+                <div class="glitch-red" data-text="8-А ONLINE">8-А ONLINE</div>
+                <div class="glitch-dark" data-text="8-А ONLINE">8-А ONLINE</div>
+                <h1 class="glitch" data-text="8-А ONLINE">8-А ONLINE</h1>
             </div>
-            <div class="stat-card">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                </svg>
-                <div>
-                    <div class="stat-label">УРОКІВ</div>
-                    <div class="stat-value">17</div>
-</div>
-            </div>
-            <div class="stat-card">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                </svg>
-                <div>
-                    <div class="stat-label">PING</div>
-                    <div class="stat-value green">12ms</div>
+
+            <div class="subtitle-wrapper">
+                <div class="subtitle" id="connection-trigger">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                    <span id="connection-text">Secure Terminal Connection</span>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section class="schedule">
-        <div class="container">
-            <h2><span>&gt;</span> РОЗКЛАД_<div class="cursor-blink"></div></h2>
-            <div class="lessons-grid" id="lessons"></div>
-        </div>
-    </section>
+            <div class="description">
+                <p class="terminal-text"><span>></span> INITIALIZING ENCRYPTED UPLINK...</p>
+                <p class="terminal-text"><span>></span> ACCESSING CLASSROOM DATABASE [8-A_CORE]</p>
+                <p class="terminal-text"><span>></span> BYPASSING GEOGRAPHICAL LIMITATIONS</p>
+                <p class="terminal-text"><span>></span> WELCOME BACK, STUDENT. READY FOR DEPLOYMENT.</p>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    <div>
+                        <div class="stat-label">ONLINE</div>
+                        <div class="stat-value" id="online-count">25/28</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <div>
+                        <div class="stat-label">SECURITY</div>
+                        <div class="stat-value">LEVEL_4</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <div>
+                        <div class="stat-label">PING</div>
+                        <div class="stat-value green">12ms</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="schedule">
+            <div class="container">
+                <h2><span>&gt;</span> РОЗКЛАД_<div class="cursor-blink"></div></h2>
+                <div class="lessons-grid" id="lessons"></div>
+            </div>
+        </section>
+    </main>
+
     <footer>
         <div class="footer-content">
             <div class="footer-text">
@@ -903,7 +1032,7 @@
                     <span>Author</span>
                 </a>
                 <a href="https://github.com/viarol200-byte/site8-anagithabe.ioV2" target="_blank" class="footer-btn">
-<svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
                     </svg>
                     <span>GitHub</span>
@@ -919,13 +1048,14 @@
         </div>
     </footer>
     <script src="script.js"></script>
-<div class="ai-watermark">
-    <a href="https://t.me/Paxff" target="_blank" class="ai-link">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="14" height="14">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
-        </svg>
-        <span>AI-Assisted</span> by Paxff
-    </a>
-</div>
+    <div class="ai-watermark">
+        <a href="https://t.me/Paxff" target="_blank" class="ai-link">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+            </svg>
+            <span class="ai-tag">AI-ASSISTED</span>
+            <span class="author-name">by Paxff</span>
+        </a>
+    </div>
 </body>
 </html>
