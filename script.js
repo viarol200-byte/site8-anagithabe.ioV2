@@ -73,16 +73,41 @@ lessonsContainer.appendChild(card);
     }
     setInterval(updateClock, 1000);
     updateClock();
-    const onlineCount = Math.floor(Math.random() * 3) + 25;
-    document.getElementById('online-count').textContent = `${onlineCount}/28`;
+
+    const onlineCount = document.getElementById('online-count');
+    if (onlineCount) {
+        const count = Math.floor(Math.random() * 3) + 25;
+        onlineCount.textContent = `${count}/28`;
+    }
+
+    // IP Lookup Modal
+    const connectionTrigger = document.getElementById('connection-trigger');
+    const ipModal = document.getElementById('ip-modal');
+    const ipDisplay = document.getElementById('ip-display');
+
+    if (connectionTrigger && ipModal && ipDisplay) {
+        connectionTrigger.addEventListener('click', async function() {
+            ipModal.style.display = 'flex';
+            ipDisplay.textContent = 'FETCHING...';
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                ipDisplay.textContent = data.ip;
+            } catch (error) {
+                console.error('IP Fetch Error:', error);
+                ipDisplay.textContent = 'ACCESS_DENIED';
+            }
+        });
+    }
+
 setInterval(() => {
         if (Math.random() > 0.85) {
             const cards = document.querySelectorAll('.lesson-card');
-            const randomCard = cards[Math.floor(Math.random() * cards.length)];
-            randomCard.classList.add('micro-glitch');
-            setTimeout(() => {
-                randomCard.classList.remove('micro-glitch');
-            }, 100);
+            if (cards.length > 0) {
+                const randomCard = cards[Math.floor(Math.random() * cards.length)];
+                randomCard.classList.add('micro-glitch');
+                setTimeout(() => { randomCard.classList.remove('micro-glitch'); }, 100);
+            }
         }
     }, 4000);
 
@@ -90,35 +115,28 @@ setInterval(() => {
         const glitch = document.querySelector('.glitch');
         const glitchRed = document.querySelector('.glitch-red');
         const glitchDark = document.querySelector('.glitch-dark');
+        if (!glitch) return;
         
         glitch.style.animation = 'none';
-        glitchRed.style.animation = 'none';
-        glitchDark.style.animation = 'none';
-        
         void glitch.offsetWidth;
-        
         glitch.style.textShadow = `-4px 0 #dc2626, 4px 0 #7f1d1d, 0 0 40px rgba(220, 38, 38, 0.8)`;
-        glitchRed.style.opacity = '0.8';
-        glitchRed.style.transform = 'translate(-5px, 2px)';
-        glitchDark.style.opacity = '0.7';
-        glitchDark.style.transform = 'translate(5px, -2px)';
+        if(glitchRed) {
+            glitchRed.style.opacity = '0.8';
+            glitchRed.style.transform = 'translate(-5px, 2px)';
+        }
+        if(glitchDark) {
+            glitchDark.style.opacity = '0.7';
+            glitchDark.style.transform = 'translate(5px, -2px)';
+        }
         
         setTimeout(() => {
             glitch.style.textShadow = '';
             glitch.style.animation = '';
-            glitchRed.style.opacity = '';
-            glitchRed.style.transform = '';
-            glitchRed.style.animation = '';
-            glitchDark.style.opacity = '';
-            glitchDark.style.transform = '';
-            glitchDark.style.animation = '';
+            if(glitchRed) { glitchRed.style.opacity = ''; glitchRed.style.transform = ''; }
+            if(glitchDark) { glitchDark.style.opacity = ''; glitchDark.style.transform = ''; }
         }, 300);
     }
-    setInterval(() => {
-        if (Math.random() > 0.7) {
-            triggerGlitch();
-        }
-    }, 5000);
+    setInterval(() => { if (Math.random() > 0.7) triggerGlitch(); }, 5000);
 
     function showLessonModal(subject, link) {
         const modal = document.createElement('div');
@@ -135,17 +153,7 @@ setInterval(() => {
             </div>
         `;
         document.body.appendChild(modal);
-
-        const closeBtn = modal.querySelector('.close-btn');
-        closeBtn.addEventListener('click', () => {
-            document.body.removeChild(modal);
-        });
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                document.body.removeChild(modal);
-            }
-        });
+        modal.querySelector('.close-btn').addEventListener('click', () => document.body.removeChild(modal));
+        modal.addEventListener('click', (e) => { if (e.target === modal) document.body.removeChild(modal); });
     }
 });
-
